@@ -44,6 +44,12 @@
 		var im6=new FILTER.Image('che.jpg');
 		var im7=new FILTER.Image('che.jpg');
 
+		/* function to apply a filter to an image
+		   returns a new image; does not
+                */
+		var applyFilter = function(image, filter, params) {
+		
+
 		var greyEdgeFilter = new FILTER.GreyEdge(im1);
 
 		container.appendChild(im1.canvasElement);

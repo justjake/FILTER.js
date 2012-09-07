@@ -18,7 +18,9 @@ COMMON_FILES = [
 'filters/ColorMatrixFilter.js',
 'filters/ConvolutionMatrixFilter.js',
 'filters/DisplacementMapFilter.js',
-'composite/SobelFilter.js'
+'composite/SobelFilter.js',
+'composite/GreyEdge.js',
+'composite/Sobel.js'
 ]
 
 def merge(files,enc):

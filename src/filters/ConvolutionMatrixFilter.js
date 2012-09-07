@@ -54,6 +54,23 @@ FILTER.ConvolutionMatrixFilter.prototype.apply=function()
   }
   this.image.setPixelData(dst);
 };
+
+FILTER.ConvolutionMatrixFilter.prototype.sobel1 = function()
+{
+    this.weights = [-1, 0, 1,
+                    -2, 0, 2,
+                    -1, 0, 1];
+    return this;
+};
+
+FILTER.ConvolutionMatrixFilter.prototype.sobel2 = function()
+{
+    this.weights = [1, 2, 1,
+                    0, 0, 0,
+                    -1, -2, -1];
+    return this;
+};
+
 FILTER.ConvolutionMatrixFilter.prototype.blur=function()
 {
 	var w=1/9;

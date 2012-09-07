@@ -43,9 +43,6 @@
 		var im5=new FILTER.Image('che.jpg');
 		var im6=new FILTER.Image('che.jpg');
 		var im7=new FILTER.Image('che.jpg');
-
-		var greyEdgeFilter = new FILTER.GreyEdge(im1);
-
 		container.appendChild(im1.canvasElement);
 		container.appendChild(im2.canvasElement);
 		container.appendChild(im3.canvasElement);
@@ -57,16 +54,15 @@
 		{
 		/**
 		     new FILTER.Sobel(im2).apply();
-		     console.log(thresh);
+            console.log(thresh);
 		     new FILTER.GreyEdge(im3).apply(thresh);
 		     new FILTER.ConvolutionMatrixFilter(im4).blur4().apply();
 		     new FILTER.ConvolutionMatrixFilter(im5).edge().apply();
 		     new FILTER.SobelFilter(im6).apply();
 		     new FILTER.ConvolutionMatrixFilter(im7).emboss().apply();
-		**/
+		**//
 
-		greyEdgeFilter.apply(thresh);
-
+			 aside.innerHTML+="<div><ol><li>Original Image</li><li>Colorized</li><li>Grayscale and Contrast</li><li>Blured</li><li>Edges</li><li>Sobel filter</li><li>Emboss</li></ol></div>";
 		}
 		</script>
 </body></html>
