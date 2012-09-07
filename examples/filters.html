@@ -36,26 +36,79 @@
 		var test=document.getElementById('test');
 		test.addEventListener('click',dotest,false);
 		var container=document.getElementById('container');
-		var im1=new FILTER.Image('che.jpg');
-		var im2=new FILTER.Image('che.jpg');
-		var im3=new FILTER.Image('che.jpg');
-		var im4=new FILTER.Image('che.jpg');
-		var im5=new FILTER.Image('che.jpg');
-		var im6=new FILTER.Image('che.jpg');
-		var im7=new FILTER.Image('che.jpg');
 
-		var greyEdgeFilter = new FILTER.GreyEdge(im1);
+        var images = [0,1,2,3,4,5,6].map(function() { return new FILTER.Image('che.jpg'); });
 
-		container.appendChild(im1.canvasElement);
-		container.appendChild(im2.canvasElement);
-		container.appendChild(im3.canvasElement);
-		container.appendChild(im4.canvasElement);
-		container.appendChild(im5.canvasElement);
-		container.appendChild(im6.canvasElement);
-		container.appendChild(im7.canvasElement);
-		function dotest(event)
-		{
-		/**
+
+        /* Function that produces stateless applicator functions from a FILTER.filter
+        @param [FILTER.filter] filter       the filter that will be applied
+        @param [function] run_on_filter     a function that will be applied to the filter (with the filter as *this*)
+
+        call with applyFilter(image, [filter, apply, params, here])
+        */
+        var createFilterFunction = function(filter, run_on_filter) {
+            run_on_filter = run_on_filter || function(){};
+            var fn = function(image, params) {
+                var instance_image = image.clone();
+                var instance_filter = (new filter(instance_image));
+                params = params || [];
+
+                // apply the filter modifier
+                run_on_filter.apply(instance_filter)
+
+                // apply the filter to the instance image
+                instance_filter.apply.apply(instance_filter, params);
+                console.log("produced image", instance_image);
+                return instance_image;
+            }
+            return fn;
+        }
+
+        var canvas_from_image = function(image) {
+            return image.canvasElement;
+        }
+
+        /* Track dom element references allowing you to easily replace them */
+        var DOMref = function(dom_el) {
+            this.currentDomElement = dom_el
+        }
+        /* replace this element with in the DOM with a different one */
+        DOMref.prototype.replace_with = function(new_el) {
+            this.currentDomElement.parentNode.replaceChild(new_el, this.currentDomElement);
+            this.currentDomElement = new_el;
+        }
+
+        // create functional filters
+        var applySobel = createFilterFunction(FILTER.Sobel);
+        var applyGreyEdge = createFilterFunction(FILTER.GreyEdge);
+        var applyBlur = createFilterFunction(FILTER.ConvolutionMatrixFilter, function() { this.blur4(); });
+        var applyEdge = createFilterFunction(FILTER.ConvolutionMatrixFilter, function() { this.edge(); });
+        var applyEmboss = createFilterFunction(FILTER.ConvolutionMatrixFilter, function() { this.emboss(); });
+        var applySobelFilter = createFilterFunction(FILTER.SobelFilter);
+
+
+
+        // DOM replacables for each canvas
+        var image_replaces = images.map(function(val, i, arr) {
+            // also go ahead and append those canvases to the document
+            container.appendChild(val.canvasElement);
+            return new DOMref(val.canvasElement)
+        });
+
+
+		function dotest(e)
+        {
+            // greyEdgeFilter.apply(thresh);
+            var new_image = applyGreyEdge(images[0], [thresh]);
+            // replace old im3 dom element with the new image dom element
+            image_replaces[6].replace_with(canvas_from_image(new_image));
+		}
+
+
+
+        // woohoo run on load!
+        window.onload = function() {
+            /*
 		     new FILTER.Sobel(im2).apply();
 		     console.log(thresh);
 		     new FILTER.GreyEdge(im3).apply(thresh);
@@ -63,10 +116,20 @@
 		     new FILTER.ConvolutionMatrixFilter(im5).edge().apply();
 		     new FILTER.SobelFilter(im6).apply();
 		     new FILTER.ConvolutionMatrixFilter(im7).emboss().apply();
-		**/
+             */
 
-		greyEdgeFilter.apply(thresh);
+            var new_image = applyGreyEdge(images[0], [thresh]);
+            // replace old im3 dom element with the new image dom element
+            image_replaces[6].replace_with(canvas_from_image(new_image));
 
-		}
+            // oh shit it's functional (!)
+            // we can use im1 over and over because each image is the same.
+            image_replaces[1].replace_with(canvas_from_image(applySobel(      images[0])));
+            image_replaces[2].replace_with(canvas_from_image(applyBlur(       images[0])));
+            image_replaces[3].replace_with(canvas_from_image(applyEdge(       images[0])));
+            image_replaces[4].replace_with(canvas_from_image(applyEmboss(     images[0])));
+            image_replaces[5].replace_with(canvas_from_image(applySobelFilter(images[0])));
+        }
+
 		</script>
 </body></html>
