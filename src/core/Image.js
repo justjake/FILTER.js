@@ -246,7 +246,7 @@ FILTER.Image.prototype.setImage=function(img,callback)
 		this.canvasElement.width=this.width;
 		this.canvasElement.height=this.height;
 		this.context=this.canvasElement.getContext('2d');
-		this.context.drawImage(this.image,0,0);
+		this.context.drawImage(this.image,0,0,this.width, this.height);
 		if (img instanceof Image)
 			this.type='image';
 		if (img instanceof HTMLCanvasElement)
