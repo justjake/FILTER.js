@@ -20,7 +20,20 @@ COMMON_FILES = [
 'filters/DisplacementMapFilter.js',
 'composite/SobelFilter.js',
 'composite/GreyEdge.js',
+<<<<<<< HEAD
 'composite/Sobel.js'
+=======
+'composite/Sobel.js',
+'composite/Negative.js',
+'composite/Thermal.js',
+'composite/Quantize.js',
+'composite/Brightness.js',
+'composite/Contrast.js',
+'composite/HueSaturation.js',
+'composite/TiltShift.js',
+'composite/Sepia.js',
+'composite/Sharpen.js'
+>>>>>>> First Commit
 ]
 
 def merge(files,enc):
