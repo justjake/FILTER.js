@@ -1,19 +1,33 @@
 // Threshold and Edge Detected Gray Filter
+<<<<<<< HEAD
 FILTER.GreyEdge=function(image)
 {
 	this.image=image;
 	//	this.initialPixelData = image.getPixelData();
+=======
+// By: Evan Lee
+FILTER.GreyEdge=function(image)
+{
+	this.image=image;
+    this.initialImage = null;
+>>>>>>> First Commit
 };
 FILTER.GreyEdge.prototype=new FILTER.Filter(); 
 FILTER.GreyEdge.prototype.constructor=FILTER.GreyEdge; 
 FILTER.GreyEdge.prototype.apply=function(value) 
 {
+<<<<<<< HEAD
     console.log("Applying GreyEdge filter");
     /**
     if(this.initialImage == null){
         this.initialImage = this.image;
     }
     **/
+=======
+    if(this.initialImage == null){
+        this.initialImage = this.image;
+    }
+>>>>>>> First Commit
 	var dst=[];
     var thresh = [];
     //Edge Detect Greyscale
