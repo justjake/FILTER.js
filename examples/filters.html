@@ -36,6 +36,7 @@
 		var test=document.getElementById('test');
 		test.addEventListener('click',dotest,false);
 		var container=document.getElementById('container');
+<<<<<<< HEAD
 
         var images = [0,1,2,3,4,5,6].map(function() { return new FILTER.Image('che.jpg'); });
 
@@ -131,5 +132,62 @@
             image_replaces[5].replace_with(canvas_from_image(applySobelFilter(images[0])));
         }
 
+=======
+		var im1=new FILTER.Image('mountains.jpg');
+		var im2=new FILTER.Image('mountains.jpg');
+		var im3=new FILTER.Image('mountains.jpg');
+		var im4=new FILTER.Image('mountains.jpg');
+		var im5=new FILTER.Image('mountains.jpg');
+        var im6=new FILTER.Image('mountains.jpg');
+        var im7=new FILTER.Image('mountains.jpg');
+        var im8=new FILTER.Image('mountains.jpg');
+        var im9=new FILTER.Image('mountains.jpg');
+        var im10=new FILTER.Image('mountains.jpg');
+        var im11=new FILTER.Image('mountains.jpg');
+        var im12=new FILTER.Image('mountains.jpg');
+        var im13=new FILTER.Image('mountains.jpg');
+        var im14=new FILTER.Image('mountains.jpg');
+        var im15=new FILTER.Image('mountains.jpg');
+		container.appendChild(im1.canvasElement);
+		container.appendChild(im2.canvasElement);
+		container.appendChild(im3.canvasElement);
+		container.appendChild(im4.canvasElement);
+		container.appendChild(im5.canvasElement);
+		container.appendChild(im6.canvasElement);
+        container.appendChild(im7.canvasElement);
+        container.appendChild(im8.canvasElement);
+        container.appendChild(im9.canvasElement);
+        container.appendChild(im10.canvasElement);
+        container.appendChild(im11.canvasElement);
+        container.appendChild(im12.canvasElement);
+        container.appendChild(im13.canvasElement);
+        container.appendChild(im14.canvasElement);
+        container.appendChild(im15.canvasElement);
+		function dotest(event)
+		{
+             new FILTER.Sobel(im2).apply();
+             new FILTER.GreyEdge(im3).apply(thresh);
+             new FILTER.Negative(im4).apply();
+             new FILTER.Quantize(im5).apply(2);
+             new FILTER.Quantize(im6).apply(8);
+             new FILTER.Thermal(im7).apply(200,255,255,0.75);
+             new FILTER.Quantize(im8).apply(3);
+             new FILTER.ConvolutionMatrixFilter(im8).blur().apply();
+             new FILTER.Contrast(im9).apply(128);
+             new FILTER.HueSaturation(im10).apply(40,0);
+             new FILTER.Brightness(im11).apply(50);
+             new FILTER.Sepia(im12).apply(1);
+             
+             
+             //combined filters for im13
+             new FILTER.Quantize(im13).apply(4);
+             new FILTER.Thermal(im13).apply(120,200,200,0.75);
+             new FILTER.Negative(im13).apply();
+             new FILTER.ConvolutionMatrixFilter(im13).blur().apply();
+            
+             new FILTER.TiltShift(im14).apply(80, 120, 150, 10);
+             new FILTER.unsharp(im15).apply(0.25);
+		}
+>>>>>>> First Commit
 		</script>
 </body></html>

@@ -1,4 +1,5 @@
 // Sobel  Filter
+// By: Evan Lee
 FILTER.SobelFilter=function(image)
 {
 	this.image=image;
